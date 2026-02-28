@@ -1,0 +1,148 @@
+2026-03-01 00:22:28,070 - config - INFO - Bot configuration loaded successfully
+2026-03-01 00:22:28,074 - config - INFO - Settings loaded from /home/aryan/Desktop/newship/chatwelcome/data/settings.json
+2026-03-01 00:22:28,886 - config - INFO - Dialogues loaded successfully
+2026-03-01 00:22:28,900 - config - INFO - ==================================================
+2026-03-01 00:22:28,901 - config - INFO - 🤖 Telegram Welcome Bot Starting...
+2026-03-01 00:22:28,902 - config - INFO - ==================================================
+2026-03-01 00:22:28,903 - config - INFO - ✅ Bot Token: **********...aS9dI
+2026-03-01 00:22:28,905 - config - INFO - ✅ Admin ID: 8308946154
+2026-03-01 00:22:28,906 - config - INFO - ✅ Settings loaded: 10 items
+2026-03-01 00:22:29,834 - config - INFO - ✅ Webhook deleted, pending updates cleared
+2026-03-01 00:22:29,835 - config - INFO - 🚀 Bot is now running! Press Ctrl+C to stop.
+2026-03-01 00:22:29,835 - config - INFO - ==================================================
+2026-03-01 00:22:29,840 - aiogram.dispatcher - INFO - Start polling
+2026-03-01 00:22:30,261 - aiogram.dispatcher - INFO - Run polling for bot @Welcome980bot id=8785821733 - 'Welcome 🤗'
+2026-03-01 00:23:01,561 - aiogram.event - INFO - Update id=154816782 is not handled. Duration 0 ms by bot id=8785821733
+2026-03-01 00:23:02,065 - config - INFO - Group farewell sent for 7480594360 in -1003519051727
+2026-03-01 00:23:02,066 - aiogram.event - INFO - Update id=154816781 is handled. Duration 786 ms by bot id=8785821733
+2026-03-01 00:23:17,416 - aiogram.event - INFO - Update id=154816784 is not handled. Duration 1 ms by bot id=8785821733
+2026-03-01 00:23:21,525 - utils.image_gen - INFO - Welcome card generated for: Durga
+2026-03-01 00:23:23,421 - config - INFO - Group welcome sent to 7480594360 in -1003519051727
+2026-03-01 00:23:23,422 - aiogram.event - INFO - Update id=154816783 is handled. Duration 6235 ms by bot id=8785821733
+2026-03-01 00:24:02,701 - aiogram.event - INFO - Update id=154816786 is not handled. Duration 1 ms by bot id=8785821733
+2026-03-01 00:24:04,539 - config - INFO - Group farewell sent for 7480594360 in -1003519051727
+2026-03-01 00:24:04,545 - aiogram.event - INFO - Update id=154816785 is handled. Duration 2107 ms by bot id=8785821733
+2026-03-01 00:24:15,252 - aiogram.event - INFO - Update id=154816788 is not handled. Duration 1 ms by bot id=8785821733
+2026-03-01 00:24:25,075 - utils.image_gen - INFO - Welcome card generated for: Durga
+2026-03-01 00:24:26,466 - config - INFO - Group welcome sent to 7480594360 in -1003519051727
+2026-03-01 00:24:26,467 - aiogram.event - INFO - Update id=154816787 is handled. Duration 11542 ms by bot id=8785821733
+2026-03-01 00:25:44,420 - aiogram.dispatcher - WARNING - Received SIGINT signal
+2026-03-01 00:25:44,422 - aiogram.dispatcher - INFO - Polling stopped for bot @Welcome980bot id=8785821733 - 'Welcome 🤗'
+2026-03-01 00:25:44,423 - aiogram.dispatcher - INFO - Polling stopped
+2026-03-01 00:25:44,677 - config - INFO - Bot session closed
+2026-03-01 00:44:05,881 - config - INFO - Bot configuration loaded successfully
+2026-03-01 00:44:05,954 - config - INFO - Settings loaded from /home/aryan/Desktop/newship/chatwelcome/data/settings.json
+2026-03-01 00:44:06,832 - config - INFO - Dialogues loaded successfully
+2026-03-01 00:44:06,844 - config - INFO - ==================================================
+2026-03-01 00:44:06,846 - config - INFO - 🤖 Telegram Welcome Bot Starting...
+2026-03-01 00:44:06,846 - config - INFO - ==================================================
+2026-03-01 00:44:06,847 - config - INFO - ✅ Bot Token: **********...aS9dI
+2026-03-01 00:44:06,847 - config - INFO - ✅ Admin ID: 8308946154
+2026-03-01 00:44:06,848 - config - INFO - ✅ Settings loaded: 10 items
+2026-03-01 00:44:07,754 - config - INFO - ✅ Webhook deleted, pending updates cleared
+2026-03-01 00:44:07,755 - config - INFO - 🚀 Bot is now running! Press Ctrl+C to stop.
+2026-03-01 00:44:07,755 - config - INFO - ==================================================
+2026-03-01 00:44:07,758 - aiogram.dispatcher - INFO - Start polling
+2026-03-01 00:44:08,057 - aiogram.dispatcher - INFO - Run polling for bot @Welcome980bot id=8785821733 - 'Welcome 🤗'
+2026-03-01 00:44:18,326 - aiogram.event - INFO - Update id=154816790 is not handled. Duration 0 ms by bot id=8785821733
+2026-03-01 00:44:19,117 - config - INFO - Group farewell sent for 7480594360 in -1003519051727
+2026-03-01 00:44:19,118 - aiogram.event - INFO - Update id=154816789 is handled. Duration 985 ms by bot id=8785821733
+2026-03-01 00:44:23,262 - aiogram.event - INFO - Update id=154816792 is not handled. Duration 0 ms by bot id=8785821733
+2026-03-01 00:44:26,546 - utils.image_gen - INFO - Welcome card generated for: Durga
+2026-03-01 00:44:28,327 - config - INFO - Group welcome sent to 7480594360 in -1003519051727
+2026-03-01 00:44:28,328 - aiogram.event - INFO - Update id=154816791 is handled. Duration 5294 ms by bot id=8785821733
+2026-03-01 00:45:54,176 - aiogram.dispatcher - WARNING - Received SIGINT signal
+2026-03-01 00:45:54,203 - aiogram.dispatcher - INFO - Polling stopped for bot @Welcome980bot id=8785821733 - 'Welcome 🤗'
+2026-03-01 00:45:54,205 - aiogram.dispatcher - INFO - Polling stopped
+2026-03-01 00:45:54,471 - config - INFO - Bot session closed
+2026-03-01 00:46:24,122 - config - INFO - Bot configuration loaded successfully
+2026-03-01 00:46:24,135 - config - INFO - Settings loaded from /home/aryan/Desktop/newship/chatwelcome/data/settings.json
+2026-03-01 00:46:24,782 - config - INFO - Dialogues loaded successfully
+2026-03-01 00:46:24,794 - config - INFO - ==================================================
+2026-03-01 00:46:24,795 - config - INFO - 🤖 Telegram Welcome Bot Starting...
+2026-03-01 00:46:24,795 - config - INFO - ==================================================
+2026-03-01 00:46:24,796 - config - INFO - ✅ Bot Token: **********...aS9dI
+2026-03-01 00:46:24,797 - config - INFO - ✅ Admin ID: 8308946154
+2026-03-01 00:46:24,798 - config - INFO - ✅ Settings loaded: 10 items
+2026-03-01 00:46:25,663 - config - INFO - ✅ Webhook deleted, pending updates cleared
+2026-03-01 00:46:25,664 - config - INFO - 🚀 Bot is now running! Press Ctrl+C to stop.
+2026-03-01 00:46:25,664 - config - INFO - ==================================================
+2026-03-01 00:46:25,668 - aiogram.dispatcher - INFO - Start polling
+2026-03-01 00:46:25,930 - aiogram.dispatcher - INFO - Run polling for bot @Welcome980bot id=8785821733 - 'Welcome 🤗'
+2026-03-01 00:46:30,112 - aiogram.event - INFO - Update id=154816796 is not handled. Duration 2 ms by bot id=8785821733
+2026-03-01 00:46:40,343 - config - INFO - Group welcome sent to 7480594360 in -1003519051727
+2026-03-01 00:46:40,344 - aiogram.event - INFO - Update id=154816795 is handled. Duration 10492 ms by bot id=8785821733
+2026-03-01 00:47:14,387 - aiogram.dispatcher - WARNING - Received SIGINT signal
+2026-03-01 00:47:14,389 - aiogram.dispatcher - INFO - Polling stopped for bot @Welcome980bot id=8785821733 - 'Welcome 🤗'
+2026-03-01 00:47:14,389 - aiogram.dispatcher - INFO - Polling stopped
+2026-03-01 00:47:14,641 - config - INFO - Bot session closed
+2026-03-01 00:53:16,372 - config - INFO - Bot configuration loaded successfully
+2026-03-01 00:53:17,168 - config - INFO - Settings loaded from /home/aryan/Desktop/newship/chatwelcome/data/settings.json
+2026-03-01 00:53:17,716 - config - INFO - Dialogues loaded successfully
+2026-03-01 00:53:17,723 - config - INFO - ==================================================
+2026-03-01 00:53:17,724 - config - INFO - 🤖 Telegram Welcome Bot Starting...
+2026-03-01 00:53:17,724 - config - INFO - ==================================================
+2026-03-01 00:53:17,725 - config - INFO - ✅ Bot Token: **********...aS9dI
+2026-03-01 00:53:17,725 - config - INFO - ✅ Admin ID: 8308946154
+2026-03-01 00:53:17,725 - config - INFO - ✅ Settings loaded: 10 items
+2026-03-01 00:53:18,625 - config - INFO - ✅ Webhook deleted, pending updates cleared
+2026-03-01 00:53:18,625 - config - INFO - 🚀 Bot is now running! Press Ctrl+C to stop.
+2026-03-01 00:53:18,626 - config - INFO - ==================================================
+2026-03-01 00:53:18,628 - aiogram.dispatcher - INFO - Start polling
+2026-03-01 00:53:18,903 - aiogram.dispatcher - INFO - Run polling for bot @Welcome980bot id=8785821733 - 'Welcome 🤗'
+2026-03-01 00:53:50,531 - aiogram.event - INFO - Update id=154816798 is not handled. Duration 0 ms by bot id=8785821733
+2026-03-01 00:53:51,140 - config - INFO - Group farewell sent for 7480594360 in -1003519051727
+2026-03-01 00:53:51,141 - aiogram.event - INFO - Update id=154816797 is handled. Duration 810 ms by bot id=8785821733
+2026-03-01 00:53:54,996 - aiogram.event - INFO - Update id=154816800 is not handled. Duration 0 ms by bot id=8785821733
+2026-03-01 00:53:58,447 - config - ERROR - Error sending group welcome: name 'new_user' is not defined
+2026-03-01 00:53:58,866 - aiogram.event - INFO - Update id=154816799 is handled. Duration 4054 ms by bot id=8785821733
+2026-03-01 00:54:26,822 - aiogram.dispatcher - WARNING - Received SIGINT signal
+2026-03-01 00:54:26,823 - aiogram.dispatcher - INFO - Polling stopped for bot @Welcome980bot id=8785821733 - 'Welcome 🤗'
+2026-03-01 00:54:26,824 - aiogram.dispatcher - INFO - Polling stopped
+2026-03-01 00:54:27,076 - config - INFO - Bot session closed
+2026-03-01 00:54:53,654 - config - INFO - Bot configuration loaded successfully
+2026-03-01 00:54:53,655 - config - INFO - Settings loaded from /home/aryan/Desktop/newship/chatwelcome/data/settings.json
+2026-03-01 00:54:53,935 - config - INFO - Dialogues loaded successfully
+2026-03-01 00:54:53,943 - config - INFO - ==================================================
+2026-03-01 00:54:53,943 - config - INFO - 🤖 Telegram Welcome Bot Starting...
+2026-03-01 00:54:53,944 - config - INFO - ==================================================
+2026-03-01 00:54:53,944 - config - INFO - ✅ Bot Token: **********...aS9dI
+2026-03-01 00:54:53,945 - config - INFO - ✅ Admin ID: 8308946154
+2026-03-01 00:54:53,945 - config - INFO - ✅ Settings loaded: 10 items
+2026-03-01 00:54:54,612 - config - INFO - ✅ Webhook deleted, pending updates cleared
+2026-03-01 00:54:54,612 - config - INFO - 🚀 Bot is now running! Press Ctrl+C to stop.
+2026-03-01 00:54:54,613 - config - INFO - ==================================================
+2026-03-01 00:54:54,615 - aiogram.dispatcher - INFO - Start polling
+2026-03-01 00:54:54,908 - aiogram.dispatcher - INFO - Run polling for bot @Welcome980bot id=8785821733 - 'Welcome 🤗'
+2026-03-01 00:54:58,058 - aiogram.event - INFO - Update id=154816804 is not handled. Duration 0 ms by bot id=8785821733
+2026-03-01 00:55:02,749 - config - INFO - Group welcome sent to 7480594360 in -1003519051727
+2026-03-01 00:55:02,750 - aiogram.event - INFO - Update id=154816803 is handled. Duration 4905 ms by bot id=8785821733
+2026-03-01 00:55:42,635 - aiogram.dispatcher - WARNING - Received SIGINT signal
+2026-03-01 00:55:42,652 - aiogram.dispatcher - INFO - Polling stopped for bot @Welcome980bot id=8785821733 - 'Welcome 🤗'
+2026-03-01 00:55:42,653 - aiogram.dispatcher - INFO - Polling stopped
+2026-03-01 00:55:42,905 - config - INFO - Bot session closed
+2026-03-01 01:07:23,707 - config - INFO - Bot configuration loaded successfully
+2026-03-01 01:07:23,738 - config - INFO - Settings loaded from /home/aryan/Desktop/newship/chatwelcome/data/settings.json
+2026-03-01 01:07:24,740 - config - INFO - Dialogues loaded successfully
+2026-03-01 01:07:24,750 - config - INFO - ==================================================
+2026-03-01 01:07:24,750 - config - INFO - 🤖 Telegram Welcome Bot Starting...
+2026-03-01 01:07:24,751 - config - INFO - ==================================================
+2026-03-01 01:07:24,751 - config - INFO - ✅ Bot Token: **********...aS9dI
+2026-03-01 01:07:24,752 - config - INFO - ✅ Admin ID: 8308946154
+2026-03-01 01:07:24,752 - config - INFO - ✅ Settings loaded: 10 items
+2026-03-01 01:07:24,753 - config - INFO - 🌐 Starting Web Server for Keep-Alive...
+2026-03-01 01:07:26,213 - config - INFO - ✅ Webhook deleted, pending updates cleared
+2026-03-01 01:07:26,213 - config - INFO - 🚀 Bot is now running! Press Ctrl+C to stop.
+2026-03-01 01:07:26,214 - config - INFO - ==================================================
+2026-03-01 01:07:26,217 - aiogram.dispatcher - INFO - Start polling
+2026-03-01 01:07:26,578 - aiogram.dispatcher - INFO - Run polling for bot @Welcome980bot id=8785821733 - 'Welcome 🤗'
+2026-03-01 01:07:31,652 - aiogram.event - INFO - Update id=154816808 is not handled. Duration 0 ms by bot id=8785821733
+2026-03-01 01:07:36,509 - config - INFO - Group welcome sent to 7480594360 in -1003519051727
+2026-03-01 01:07:36,509 - aiogram.event - INFO - Update id=154816807 is handled. Duration 5121 ms by bot id=8785821733
+2026-03-01 01:08:48,886 - aiogram.event - INFO - Update id=154816810 is not handled. Duration 0 ms by bot id=8785821733
+2026-03-01 01:08:49,029 - config - INFO - Group farewell sent for 7480594360 in -1003519051727
+2026-03-01 01:08:49,029 - aiogram.event - INFO - Update id=154816809 is handled. Duration 395 ms by bot id=8785821733
+2026-03-01 01:08:50,069 - aiogram.dispatcher - WARNING - Received SIGINT signal
+2026-03-01 01:08:50,071 - aiogram.dispatcher - INFO - Polling stopped for bot @Welcome980bot id=8785821733 - 'Welcome 🤗'
+2026-03-01 01:08:50,072 - aiogram.dispatcher - INFO - Polling stopped
+2026-03-01 01:08:50,324 - config - INFO - Bot session closed

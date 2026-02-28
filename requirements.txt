@@ -1,0 +1,17 @@
+# Telegram Welcome Bot Dependencies
+# ================================
+
+# Telegram Bot Framework
+aiogram>=3.4.0
+
+# Image Processing
+Pillow>=10.2.0
+
+# Async HTTP Client
+aiohttp>=3.9.1
+
+# Environment Variables
+python-dotenv>=1.0.0
+
+# Optional: Better performance (uncomment if needed)
+# uvloop>=0.19.0; sys_platform != 'win32'

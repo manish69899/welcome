@@ -1,0 +1,17 @@
+# Security (Kabhi bhi apne tokens online leak mat hone dena)
+.env
+.env.local
+
+# Python Cache & Virtual Environment
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.venv/
+
+# Local Data (Agar future me SQLite use karo)
+data/settings.json
+*.sqlite3
+*.db
+txt.txt

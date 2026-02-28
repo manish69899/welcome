@@ -1,0 +1,71 @@
+{
+  "welcome_group": [
+    "Aapka swagat hai VIP zone me! 🔥 Entry toh maar li, ab thoda jalwa bhi dikhao.",
+    "Swagat nahi karोगे hamara? 😎 The legend has arrived in the chat!",
+    "Aaya ek naya shikaar! 😈 Welcome boss! Rules padh lena, warna admin ka mood kharab hote der nahi lagti. 🎭",
+    "Bhai sahab ki entry ho chuki hai! Sab log taaliyan bajao! 👏😂",
+    "Attitude level 100% detected! 🔥 Welcome to the most badass group on Telegram.",
+    "Ek aur champion join hua! 🏆 Ab group mein maza aayega!",
+    "Dharti hill gayi! 😱 Bhai ka entry ho gaya! Welcome! 💪",
+    "Alert! Alert! 🚨 Ek dangerous player aaya hai group mein! Welcome! 😎",
+    "Aapka arrival notice kiya gaya hai! 📢 Ab group ka level badh gaya! 🔥",
+    "Finally! Humara group complete hua! 🎉 Welcome to the family! 👨‍👩‍👧‍👦",
+    "Group ka temperature badh gaya! 🌡️ Someone hot just joined! 🔥",
+    "Attention everyone! 📣 Ek special guest aaya hai! Welcome! ⭐",
+    "Hold the door! 🚪 Naya member aa gaya! Welcome to the madness! 🎪",
+    "Boss mode ON! 💼 Naya leader type ka banda join hua! Welcome! 👑",
+    "Maza aa gaya! 🎊 Group mein ek aur mast insaan aaya! Welcome! 🥳",
+    "Breaking News: Ek awesome insaan ne group join kiya! 📰 Welcome! 🎉",
+    "System Alert: ✅ Naya member added! Welcome to the squad! 💯",
+    "Group just got better! 📈 Quality increased by 100%! Welcome! 🌟",
+    "Epic entry detected! 🎬 Camera on, welcome our new star! 🌟",
+    "Pro tip: Is bande se dosti kar lo! 🤝 Welcome to the group! 💪"
+  ],
+  "farewell_group": [
+    "Ek aur shaks group chhod kar chala gaya... lagta hai inko hamara attitude hazam nahi hua. 👋",
+    "Nikal pehli fursat me! 🚶‍♂️💨 Raste me aate waqt darwaza band kar dena.",
+    "Bheed kam hui, sukoon mila! 😂 Bye bye my friend!",
+    "Alvida! Inki kurbani yaad rakhi jayegi (ya shayad nahi). 🪦👋",
+    "Koi nahi, hum toh strong hain! 💪 But we'll miss you... thoda sa! 😏",
+    "Flight takeoff ho gayi! ✈️ Safe travels, ex-member! 👋",
+    "Ek khamosh valve... someone left silently! 🤫 Bye! 👋",
+    "Group ka loss = Duniya ka gain! 🌍 Go conquer the world! 🚀",
+    "Kahani khatam, picture khatam! 🎬 Alvida dosto! 👋",
+    "Mission complete! ✅ Member ne group exit kiya! Bye! 🚪",
+    "Doors are always open! 🚪 Come back when you miss us! 😊",
+    "Stats update: 📉 Member count -1! But memories +infinity! 💫",
+    "Coward detected? 😏 Just kidding! Bye bye! 👋😂",
+    "Not everyone can handle this group! 💪 Bye bye brave soul! 👋",
+    "Season finale: Member leaves the group! 🎭 Until next season... 👋"
+  ],
+  "welcome_channel": [
+    "Welcome to the channel! 🎉 Notification on rakhna warna updates miss ho jayenge.",
+    "Aapka channel me swagat hai! 🔥 Sit back and enjoy the content.",
+    "Hello and welcome! 🚀 Humari family me judne ke liye shukriya.",
+    "New subscriber alert! 📢 Thanks for joining our amazing community! 💫",
+    "Breaking: Another legend joined the channel! 📰 Welcome! 🌟",
+    "Loading complete! ✅ Welcome to the best channel on Telegram! 🎊",
+    "You made the right choice! ✨ Welcome to premium content zone! 🔥",
+    "Subscriber #added! 🔢 Thanks for being part of our journey! 🚀",
+    "Channel power +1! ⚡ Welcome to the squad! 💪",
+    "Official welcome message! 📜 You're now part of something special! ⭐"
+  ],
+  "farewell_channel": [
+    "Goodbye! 👋 Humari taraf se aapko bohot saari shubhkamnaye.",
+    "Alvida! Phir milenge chalte chalte. 🌌",
+    "Subscriber left the building! 🏢 Thanks for being with us! 👋",
+    "Stats: -1 subscriber, +1 memory! 📊 Bye bye! 💫",
+    "Channel door is always open! 🚪 Come back anytime! 😊",
+    "Sad to see you go! 😢 But we wish you all the best! 🌟",
+    "Unsubscribe successful! ✅ Thanks for your time with us! 👋"
+  ],
+  "admin_messages": {
+    "bot_started": "🤖 Bot successfully started! All systems operational.",
+    "settings_updated": "✅ Settings have been updated successfully!",
+    "welcome_test": "🧪 Welcome message test sent!",
+    "no_permission": "❌ Aap admin nahi hain! Is command ko use karne ka permission nahi hai.",
+    "invalid_format": "⚠️ Invalid format! Sahi format use karein.",
+    "stats_header": "📊 Bot Statistics",
+    "health_header": "🩺 Bot Health Status"
+  }
+}
