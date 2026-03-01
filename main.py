@@ -3,6 +3,7 @@ Telegram Welcome/Farewell Bot
 ==============================
 Professional bot with:
 - Premium welcome cards
+- VIP Tagging & Premium Captions
 - Auto-delete messages
 - Admin commands
 - Rate limiting
@@ -146,25 +147,29 @@ async def get_user_profile_pic_bytes(user_id: int) -> Optional[bytes]:
 def format_welcome_caption(
     user: types.User,
     dialogue: str,
-    join_date: str
+    join_date: str,
+    chat_title: str
 ) -> str:
-    """Format the welcome message caption."""
-    user_link = f"<a href='tg://user?id={user.id}'>{user.full_name}</a>"
-    username = f"@{user.username}" if user.username else "N/A"
+    """Format the premium VIP welcome message caption."""
+    
+    # VIP Tagging Logic (Notification ensure karega)
+    if user.username:
+        mention = f"<a href='tg://user?id={user.id}'>@{user.username}</a>"
+    else:
+        mention = f"<a href='tg://user?id={user.id}'>{user.first_name}</a>"
     
     return (
-        f"<b>✨ WELCOME ✨</b>\n\n"
-        f"<b>╭───────•❅•───────╮</b>\n"
-        f"<b>│</b>  🔥 <b>I N F O</b> 🔥  <b>│</b>\n"
-        f"<b>├───────•❅•───────┤</b>\n"
-        f"<b>│</b> 👤 <b>Name</b> : {user.full_name}\n"
-        f"<b>│</b> 🆔 <b>ID</b> : <code>{user.id}</code>\n"
-        f"<b>│</b> 📱 <b>User</b> : {username}\n"
-        f"<b>│</b> 📆 <b>Date</b> : {join_date}\n"
-        f"<b>╰───────•❅•───────╯</b>\n\n"
+        f"✨ <b>W E L C O M E</b> ✨\n\n"
+        f" {mention}, <b>{chat_title}</b> ki shandaar duniya mein aapka swagat hai! 🎉🔥\n\n"
+        f"<b>╭━━━ ⟡ VIP DETAILS ⟡ ━━━╮</b>\n"
+        f"<b>┣ 👤 Naam :</b> {user.full_name}\n"
+        f"<b>┣ 💎 User :</b> {mention}\n"
+        f"<b>┣ 🆔 ID   :</b> <code>{user.id}</code>\n"
+        f"<b>┣ 📅 Date :</b> {join_date}\n"
+        f"<b>╰━━━━━━━━━━━━━━━━━━╯</b>\n\n"
         f"<blockquote expandable>"
-        f"<i>💬 {dialogue}</i>\n\n"
-        f"📌 <b>Read Pinned Message for Rules</b>"
+        f"💬 <i>\"{dialogue}\"</i>\n\n"
+        f"⚠️ <b>Note:</b> Group ke pinned messages zaroor padhein aur rules follow karein. Enjoy your stay! 🥂"
         f"</blockquote>"
     )
 
@@ -205,6 +210,7 @@ async def cmd_start(message: types.Message):
         f"🤖 <b>I'm a Premium Welcome Bot</b>\n\n"
         f"<b>✨ Features:</b>\n"
         f"• Premium anime-style welcome cards\n"
+        f"• VIP User Tagging & Premium Captions\n"
         f"• Auto-deletes 'User joined/left' service messages\n"
         f"• Custom farewell messages\n"
         f"• Auto-delete messages\n"
@@ -433,10 +439,14 @@ async def on_user_join(event: types.ChatMemberUpdated):
             # Get profile picture
             pfp_bytes = await get_user_profile_pic_bytes(new_user.id)
             
+            # Tag logic to sync with image generator
+            tag_text = f"@{new_user.username}" if new_user.username else f"ID: {new_user.id}"
+            
             # Generate welcome card
             image_bytes = await generate_welcome_card(
                 user_pic_bytes=pfp_bytes,
                 user_name=new_user.first_name or "User",
+                user_tag=tag_text,
                 subtitle="WELCOME",
                 theme='gold'
             )
@@ -445,8 +455,8 @@ async def on_user_join(event: types.ChatMemberUpdated):
             # Prepare photo
             photo = BufferedInputFile(image_bytes.getvalue(), filename="welcome.jpg")
             
-            # Format caption
-            caption = format_welcome_caption(new_user, dialogue, join_date)
+            # Format VIP caption
+            caption = format_welcome_caption(new_user, dialogue, join_date, chat.title)
             
             # Send welcome message
             msg = await bot.send_photo(
@@ -467,9 +477,10 @@ async def on_user_join(event: types.ChatMemberUpdated):
             logger.error(f"Bot not admin in group {chat.id}")
         except Exception as e:
             logger.error(f"Error sending group welcome: {e}")
-            # Fallback: Send text-only welcome
+            # Fallback: Send text-only VIP welcome
             try:
-                text = f"👋 Welcome <a href='tg://user?id={new_user.id}'>{new_user.full_name}</a>!\n\n{dialogue}"
+                mention = f"<a href='tg://user?id={new_user.id}'>@{new_user.username}</a>" if new_user.username else f"<a href='tg://user?id={new_user.id}'>{new_user.first_name}</a>"
+                text = f"✨ <b>V I P  W E L C O M E</b> ✨\n\nAaiye {mention}, <b>{chat.title}</b> ki duniya mein aapka swagat hai! 🎉\n\n{dialogue}"
                 msg = await bot.send_message(chat.id, text)
                 stats.record_message()
                 
@@ -565,8 +576,7 @@ async def main():
     logger.info(f"✅ Settings loaded: {len(SETTINGS.get_all())} items")
     
     # 🌟 Sabse pehle Web Server ko start karo (For Render Keep-Alive)
-    logger.info("🌐 Starting Web Server for Keep-Alive in Background...")
-    # Fix applied here: Use create_task so it doesn't block the rest of the code!
+    logger.info("🌐 Starting Web Server for Keep-Alive...")
     asyncio.create_task(start_web_server())
     
     # Delete webhook and clear pending updates
