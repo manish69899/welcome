@@ -365,7 +365,7 @@ def _draw_default_avatar(
     center_x = x + size // 2
     center_y = y + size // 2
     
-    # Simple abstract silhouette
+    # Simple abstract silhouette  
     head_radius = size // 5
     draw.ellipse(
         (center_x - head_radius, center_y - head_radius - size//8,
