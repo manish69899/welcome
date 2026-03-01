@@ -158,10 +158,10 @@ def format_welcome_caption(
         mention = f"<a href='tg://user?id={user.id}'>{user.first_name}</a>"
     
     return (
-        f"✨ <b>V I P  W E L C O M E</b> ✨\n\n"
+        f"✨ <b>W E L C O M E</b> ✨\n\n"
         f"Aaiye {mention}, <b>{chat_title}</b> ki shandaar duniya mein aapka swagat hai! 🎉🔥\n\n"
-        f"<b>╭━━━ ⟡ VIP DETAILS ⟡ ━━━╮</b>\n"
-        f"<b>┣ 👤 Naam :</b> {user.full_name}\n"
+        f"<b>╭━━━ ⟡ I N F O ⟡ ━━━╮</b>\n"
+        f"<b>┣ 👤 Name :</b> {user.full_name}\n"
         f"<b>┣ 💎 User :</b> {mention}\n"
         f"<b>┣ 🆔 ID   :</b> <code>{user.id}</code>\n"
         f"<b>┣ 📅 Date :</b> {join_date}\n"
