@@ -15,3 +15,4 @@ data/settings.json
 *.sqlite3
 *.db
 txt.txt
+test.py

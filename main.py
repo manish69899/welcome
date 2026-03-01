@@ -3,7 +3,6 @@ Telegram Welcome/Farewell Bot
 ==============================
 Professional bot with:
 - Premium welcome cards
-- VIP Tagging & Premium Captions
 - Auto-delete messages
 - Admin commands
 - Rate limiting
@@ -159,8 +158,8 @@ def format_welcome_caption(
         mention = f"<a href='tg://user?id={user.id}'>{user.first_name}</a>"
     
     return (
-        f"✨ <b>W E L C O M E</b> ✨\n\n"
-        f" {mention}, <b>{chat_title}</b> ki shandaar duniya mein aapka swagat hai! 🎉🔥\n\n"
+        f"✨ <b>V I P  W E L C O M E</b> ✨\n\n"
+        f"Aaiye {mention}, <b>{chat_title}</b> ki shandaar duniya mein aapka swagat hai! 🎉🔥\n\n"
         f"<b>╭━━━ ⟡ VIP DETAILS ⟡ ━━━╮</b>\n"
         f"<b>┣ 👤 Naam :</b> {user.full_name}\n"
         f"<b>┣ 💎 User :</b> {mention}\n"
@@ -172,7 +171,6 @@ def format_welcome_caption(
         f"⚠️ <b>Note:</b> Group ke pinned messages zaroor padhein aur rules follow karein. Enjoy your stay! 🥂"
         f"</blockquote>"
     )
-
 
 def format_farewell_caption(
     user: types.User,
@@ -210,7 +208,6 @@ async def cmd_start(message: types.Message):
         f"🤖 <b>I'm a Premium Welcome Bot</b>\n\n"
         f"<b>✨ Features:</b>\n"
         f"• Premium anime-style welcome cards\n"
-        f"• VIP User Tagging & Premium Captions\n"
         f"• Auto-deletes 'User joined/left' service messages\n"
         f"• Custom farewell messages\n"
         f"• Auto-delete messages\n"
@@ -439,14 +436,10 @@ async def on_user_join(event: types.ChatMemberUpdated):
             # Get profile picture
             pfp_bytes = await get_user_profile_pic_bytes(new_user.id)
             
-            # Tag logic to sync with image generator
-            tag_text = f"@{new_user.username}" if new_user.username else f"ID: {new_user.id}"
-            
             # Generate welcome card
             image_bytes = await generate_welcome_card(
                 user_pic_bytes=pfp_bytes,
                 user_name=new_user.first_name or "User",
-                user_tag=tag_text,
                 subtitle="WELCOME",
                 theme='gold'
             )
@@ -455,8 +448,8 @@ async def on_user_join(event: types.ChatMemberUpdated):
             # Prepare photo
             photo = BufferedInputFile(image_bytes.getvalue(), filename="welcome.jpg")
             
-            # Format VIP caption
-            caption = format_welcome_caption(new_user, dialogue, join_date, chat.title)
+            # Format caption
+            caption = format_welcome_caption(new_user, dialogue, join_date)
             
             # Send welcome message
             msg = await bot.send_photo(
@@ -477,10 +470,9 @@ async def on_user_join(event: types.ChatMemberUpdated):
             logger.error(f"Bot not admin in group {chat.id}")
         except Exception as e:
             logger.error(f"Error sending group welcome: {e}")
-            # Fallback: Send text-only VIP welcome
+            # Fallback: Send text-only welcome
             try:
-                mention = f"<a href='tg://user?id={new_user.id}'>@{new_user.username}</a>" if new_user.username else f"<a href='tg://user?id={new_user.id}'>{new_user.first_name}</a>"
-                text = f"✨ <b>V I P  W E L C O M E</b> ✨\n\nAaiye {mention}, <b>{chat.title}</b> ki duniya mein aapka swagat hai! 🎉\n\n{dialogue}"
+                text = f"👋 Welcome <a href='tg://user?id={new_user.id}'>{new_user.full_name}</a>!\n\n{dialogue}"
                 msg = await bot.send_message(chat.id, text)
                 stats.record_message()
                 
@@ -576,7 +568,8 @@ async def main():
     logger.info(f"✅ Settings loaded: {len(SETTINGS.get_all())} items")
     
     # 🌟 Sabse pehle Web Server ko start karo (For Render Keep-Alive)
-    logger.info("🌐 Starting Web Server for Keep-Alive...")
+    logger.info("🌐 Starting Web Server for Keep-Alive in Background...")
+    # Fix applied here: Use create_task so it doesn't block the rest of the code!
     asyncio.create_task(start_web_server())
     
     # Delete webhook and clear pending updates
