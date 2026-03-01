@@ -114,6 +114,10 @@ def check_rate_limit(user_id: int, cooldown_seconds: int = 5) -> bool:
 # ==================== HELPER FUNCTIONS ====================
 async def delete_message_later(message: types.Message, delay: int) -> None:
     """Delete message after specified delay."""
+    if delay <= 0:
+        logger.debug(f"Auto-delete is set to {delay}s, skipping deletion.")
+        return
+        
     await asyncio.sleep(delay)
     try:
         await message.delete()
@@ -178,6 +182,17 @@ def format_farewell_caption(
     )
 
 
+# ==================== SERVICE MESSAGE DELETER ====================
+@dp.message(F.new_chat_members | F.left_chat_member)
+async def delete_system_messages(message: types.Message):
+    """Instantly deletes Telegram's default 'User joined' and 'User left' messages."""
+    try:
+        await message.delete()
+        logger.debug("Deleted a system joined/left message.")
+    except Exception as e:
+        logger.warning(f"Failed to delete system message. (Bot might not be admin): {e}")
+
+
 # ==================== START & HELP COMMANDS ====================
 @dp.message(CommandStart())
 async def cmd_start(message: types.Message):
@@ -190,6 +205,7 @@ async def cmd_start(message: types.Message):
         f"🤖 <b>I'm a Premium Welcome Bot</b>\n\n"
         f"<b>✨ Features:</b>\n"
         f"• Premium anime-style welcome cards\n"
+        f"• Auto-deletes 'User joined/left' service messages\n"
         f"• Custom farewell messages\n"
         f"• Auto-delete messages\n"
         f"• Admin controls\n\n"
@@ -200,7 +216,7 @@ async def cmd_start(message: types.Message):
         f"• /health - Bot health check\n"
         f"• /set_group_timer - Set group welcome timer (admin)\n"
         f"• /set_channel_timer - Set channel welcome timer (admin)\n\n"
-        f"📌 <b>Add me to your group/channel to get started!</b>"
+        f"📌 <b>Add me to your group/channel and make me admin to get started!</b>"
     )
     await message.reply(welcome_text)
     stats.record_message()
@@ -221,8 +237,8 @@ async def cmd_help(message: types.Message):
         "• <code>/stats</code> - View bot statistics\n"
         "• <code>/health</code> - Check bot health\n\n"
         "<b>💡 Tips:</b>\n"
-        "• Default group timer: 60 seconds\n"
-        "• Default channel timer: 15 seconds\n"
+        "• Default group timer: 900 seconds (15 mins)\n"
+        "• Default channel timer: 120 seconds (2 mins)\n"
         "• Welcome cards are auto-generated\n\n"
         "<b>❓ Need more help?</b>\n"
         "Contact the bot administrator."
@@ -301,7 +317,7 @@ async def cmd_set_group_timer(message: types.Message):
         await message.reply(
             f"⚠️ {DIALOGUES.get('admin_messages', {}).get('invalid_format', 'Invalid format!')}\n\n"
             f"📝 <b>Usage:</b> <code>/set_group_timer [seconds]</code>\n"
-            f"📌 <b>Example:</b> <code>/set_group_timer 60</code>"
+            f"📌 <b>Example:</b> <code>/set_group_timer 900</code>"
         )
 
 
@@ -333,7 +349,7 @@ async def cmd_set_channel_timer(message: types.Message):
         await message.reply(
             f"⚠️ {DIALOGUES.get('admin_messages', {}).get('invalid_format', 'Invalid format!')}\n\n"
             f"📝 <b>Usage:</b> <code>/set_channel_timer [seconds]</code>\n"
-            f"📌 <b>Example:</b> <code>/set_channel_timer 15</code>"
+            f"📌 <b>Example:</b> <code>/set_channel_timer 120</code>"
         )
 
 
@@ -396,7 +412,7 @@ async def on_user_join(event: types.ChatMemberUpdated):
             msg = await bot.send_message(chat.id, text)
             stats.record_message()
             
-            delay = SETTINGS.get("channel_auto_delete_sec", 15)
+            delay = SETTINGS.get("channel_auto_delete_sec", 120)
             if delay > 0:
                 asyncio.create_task(delete_message_later(msg, delay))
                 
@@ -441,7 +457,7 @@ async def on_user_join(event: types.ChatMemberUpdated):
             stats.record_message()
             
             # Schedule auto-delete
-            delay = SETTINGS.get("group_auto_delete_sec", 60)
+            delay = SETTINGS.get("group_auto_delete_sec", 900)
             if delay > 0:
                 asyncio.create_task(delete_message_later(msg, delay))
             
@@ -457,7 +473,7 @@ async def on_user_join(event: types.ChatMemberUpdated):
                 msg = await bot.send_message(chat.id, text)
                 stats.record_message()
                 
-                delay = SETTINGS.get("group_auto_delete_sec", 60)
+                delay = SETTINGS.get("group_auto_delete_sec", 900)
                 if delay > 0:
                     asyncio.create_task(delete_message_later(msg, delay))
             except Exception as e2:
@@ -485,7 +501,7 @@ async def on_user_leave(event: types.ChatMemberUpdated):
             msg = await bot.send_message(chat.id, text)
             stats.record_message()
             
-            delay = SETTINGS.get("channel_auto_delete_sec", 15)
+            delay = SETTINGS.get("channel_auto_delete_sec", 120)
             if delay > 0:
                 asyncio.create_task(delete_message_later(msg, delay))
                 
@@ -504,7 +520,7 @@ async def on_user_leave(event: types.ChatMemberUpdated):
             msg = await bot.send_message(chat.id, text)
             stats.record_message()
             
-            delay = SETTINGS.get("group_auto_delete_sec", 60)
+            delay = SETTINGS.get("group_auto_delete_sec", 900)
             if delay > 0:
                 asyncio.create_task(delete_message_later(msg, delay))
             
@@ -549,8 +565,9 @@ async def main():
     logger.info(f"✅ Settings loaded: {len(SETTINGS.get_all())} items")
     
     # 🌟 Sabse pehle Web Server ko start karo (For Render Keep-Alive)
-    logger.info("🌐 Starting Web Server for Keep-Alive...")
-    await start_web_server()
+    logger.info("🌐 Starting Web Server for Keep-Alive in Background...")
+    # Fix applied here: Use create_task so it doesn't block the rest of the code!
+    asyncio.create_task(start_web_server())
     
     # Delete webhook and clear pending updates
     try:

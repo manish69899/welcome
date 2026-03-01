@@ -56,36 +56,50 @@ class BotConfig:
 class SettingsManager:
     """
     Professional settings manager with:
-    - JSON persistence
+    - JSON persistence & .env fallback
     - Default values
     - Type validation
     - Auto-save functionality
     """
     
-    # Default settings
-    DEFAULT_SETTINGS: Dict[str, Any] = {
-        "group_auto_delete_sec": 60,
-        "channel_auto_delete_sec": 15,
-        "welcome_enabled": True,
-        "farewell_enabled": True,
-        "image_welcome_enabled": True,
-        "max_name_length": 14,
-        "rate_limit_seconds": 5,
-        "log_events": True,
-        "stats_enabled": True
-    }
-    
     def __init__(self, settings_file: str = SETTINGS_FILE):
         self.settings_file = settings_file
         self._settings: Dict[str, Any] = {}
+        
+        # Default settings dynamically loading from .env if available
+        self.DEFAULT_SETTINGS: Dict[str, Any] = {
+            "group_auto_delete_sec": int(os.getenv("GROUP_AUTO_DELETE_SEC", 900)),
+            "channel_auto_delete_sec": int(os.getenv("CHANNEL_AUTO_DELETE_SEC", 120)),
+            "welcome_enabled": str(os.getenv("WELCOME_ENABLED", "True")).lower() in ("true", "1", "yes"),
+            "farewell_enabled": str(os.getenv("FAREWELL_ENABLED", "True")).lower() in ("true", "1", "yes"),
+            "image_welcome_enabled": True,
+            "max_name_length": 14,
+            "rate_limit_seconds": 5,
+            "log_events": True,
+            "stats_enabled": True,
+            "image_settings": {
+                "bg_width": 800,
+                "bg_height": 400,
+                "pfp_size": 160,
+                "border_width": 6,
+                "font_size_name": 32,
+                "font_size_subtitle": 24,
+                "gold_color": "#FFD700",
+                "shadow_color": "#000000",
+                "text_color": "#FFFFFF"
+            }
+        }
         self._load()
     
     def _load(self) -> None:
         """Load settings from JSON file."""
         try:
+            os.makedirs(os.path.dirname(self.settings_file), exist_ok=True)
             if os.path.exists(self.settings_file):
                 with open(self.settings_file, "r", encoding="utf-8") as f:
-                    self._settings = json.load(f)
+                    file_settings = json.load(f)
+                    # Merge defaults with file settings
+                    self._settings = {**self.DEFAULT_SETTINGS, **file_settings}
                 logger.info(f"Settings loaded from {self.settings_file}")
             else:
                 self._settings = self.DEFAULT_SETTINGS.copy()
