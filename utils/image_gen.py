@@ -19,8 +19,12 @@ from PIL import Image, ImageDraw, ImageFont, ImageOps, ImageFilter, ImageEnhance
 logger = logging.getLogger(__name__)
 
 # ==================== CONSTANTS ====================
+# Is file ko 'utils' folder mein assume karke BASE_DIR set kiya hai
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ASSETS_DIR = os.path.join(BASE_DIR, "assets")
+
+# Agar assets folder nahi hai toh bot crash hone se bachane ke liye auto-create karega
+os.makedirs(ASSETS_DIR, exist_ok=True)
 
 # Default image settings
 DEFAULT_BG_WIDTH = 800
@@ -77,7 +81,7 @@ class FontLoader:
                 continue
         
         # Final fallback to default font
-        logger.warning("No custom font found, using default")
+        logger.warning(f"No custom font found for {style}, using default")
         return ImageFont.load_default()
 
 
@@ -160,10 +164,12 @@ class WelcomeCardGenerator:
                 bg = ImageOps.fit(bg, (self.width, self.height), centering=(0.5, 0.5))
                 logger.debug(f"Background loaded: {self.bg_path}")
                 return bg
+            else:
+                logger.warning(f"Background not found at {self.bg_path}. Check assets folder!")
         except Exception as e:
             logger.warning(f"Failed to load background: {e}")
         
-        # Fallback dark background
+        # Fallback dark background agar image na mile
         return Image.new("RGBA", (self.width, self.height), (25, 25, 30, 255))
     
     def create_pfp_mask(self, size: int = DEFAULT_PFP_SIZE) -> Image.Image:

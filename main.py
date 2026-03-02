@@ -16,6 +16,7 @@ import json
 import random
 import os
 import io
+import html  # 🛠️ BUG FIX: Added html import to escape special characters
 from datetime import datetime
 from collections import defaultdict
 from typing import Dict, Optional
@@ -32,7 +33,14 @@ from aiogram.exceptions import TelegramBadRequest, TelegramForbiddenError
 import config
 from config import logger, is_admin, SETTINGS
 from utils.image_gen import generate_welcome_card
-from keep_alive import start_web_server
+
+# Keep-alive import (Agar file nahi hai toh error catch karega)
+try:
+    from keep_alive import start_web_server
+    KEEP_ALIVE_AVAILABLE = True
+except ImportError:
+    KEEP_ALIVE_AVAILABLE = False
+    logger.warning("keep_alive.py not found. Web server will not start.")
 
 # ==================== BOT INITIALIZATION ====================
 bot = Bot(
@@ -151,23 +159,29 @@ def format_welcome_caption(
 ) -> str:
     """Format the premium VIP welcome message caption."""
     
+    # 🛠️ BUG FIX: Escape HTML characters to prevent Telegram API crashes!
+    safe_first_name = html.escape(user.first_name or "User")
+    safe_full_name = html.escape(user.full_name or "User")
+    safe_chat_title = html.escape(chat_title or "Group")
+    safe_dialogue = html.escape(dialogue)
+    
     # VIP Tagging Logic (Notification ensure karega)
     if user.username:
         mention = f"<a href='tg://user?id={user.id}'>@{user.username}</a>"
     else:
-        mention = f"<a href='tg://user?id={user.id}'>{user.first_name}</a>"
+        mention = f"<a href='tg://user?id={user.id}'>{safe_first_name}</a>"
     
     return (
         f"✨ <b>W E L C O M E</b> ✨\n\n"
-        f"Aaiye {mention}, <b>{chat_title}</b> ki shandaar duniya mein aapka swagat hai! 🎉🔥\n\n"
+        f"Aaiye {mention}, <b>{safe_chat_title}</b> ki shandaar duniya mein aapka swagat hai! 🎉🔥\n\n"
         f"<b>╭━━━ ⟡ I N F O ⟡ ━━━╮</b>\n"
-        f"<b>┣ 👤 Name :</b> {user.full_name}\n"
+        f"<b>┣ 👤 Name :</b> {safe_full_name}\n"
         f"<b>┣ 💎 User :</b> {mention}\n"
         f"<b>┣ 🆔 ID   :</b> <code>{user.id}</code>\n"
         f"<b>┣ 📅 Date :</b> {join_date}\n"
         f"<b>╰━━━━━━━━━━━━━━━━━━╯</b>\n\n"
         f"<blockquote expandable>"
-        f"💬 <i>\"{dialogue}\"</i>\n\n"
+        f"💬 <i>\"{safe_dialogue}\"</i>\n\n"
         f"⚠️ <b>Note:</b> Group ke pinned messages zaroor padhein aur rules follow karein. Enjoy your stay! 🥂"
         f"</blockquote>"
     )
@@ -177,10 +191,13 @@ def format_farewell_caption(
     dialogue: str
 ) -> str:
     """Format the farewell message."""
+    # 🛠️ BUG FIX: Escape HTML
+    safe_full_name = html.escape(user.full_name or "User")
+    safe_dialogue = html.escape(dialogue)
     return (
         f"<blockquote>"
-        f"👋 <b><a href='tg://user?id={user.id}'>{user.full_name}</a></b> left the chat.\n\n"
-        f"<i>{dialogue}</i>"
+        f"👋 <b><a href='tg://user?id={user.id}'>{safe_full_name}</a></b> left the chat.\n\n"
+        f"<i>{safe_dialogue}</i>"
         f"</blockquote>"
     )
 
@@ -406,9 +423,15 @@ async def on_user_join(event: types.ChatMemberUpdated):
     # === CHANNEL WELCOME ===
     if chat.type == ChatType.CHANNEL:
         dialogue = random.choice(DIALOGUES["welcome_channel"])
+        
+        # 🛠️ BUG FIX: Escape HTML
+        safe_full_name = html.escape(new_user.full_name or "User")
+        safe_chat_title = html.escape(chat.title or "Channel")
+        safe_dialogue = html.escape(dialogue)
+        
         text = (
-            f"<b>Welcome to {chat.title}!</b>\n\n"
-            f"Hey <a href='tg://user?id={new_user.id}'>{new_user.full_name}</a>, {dialogue}"
+            f"<b>Welcome to {safe_chat_title}!</b>\n\n"
+            f"Hey <a href='tg://user?id={new_user.id}'>{safe_full_name}</a>, {safe_dialogue}"
         )
         
         try:
@@ -448,8 +471,8 @@ async def on_user_join(event: types.ChatMemberUpdated):
             # Prepare photo
             photo = BufferedInputFile(image_bytes.getvalue(), filename="welcome.jpg")
             
-            # Format caption
-            caption = format_welcome_caption(new_user, dialogue, join_date)
+            # Generate Caption
+            caption = format_welcome_caption(new_user, dialogue, join_date, chat.title)
             
             # Send welcome message
             msg = await bot.send_photo(
@@ -469,10 +492,12 @@ async def on_user_join(event: types.ChatMemberUpdated):
         except TelegramForbiddenError:
             logger.error(f"Bot not admin in group {chat.id}")
         except Exception as e:
-            logger.error(f"Error sending group welcome: {e}")
+            logger.error(f"🔴 ERROR IN IMAGE GEN OR SENDING: {e}")
             # Fallback: Send text-only welcome
             try:
-                text = f"👋 Welcome <a href='tg://user?id={new_user.id}'>{new_user.full_name}</a>!\n\n{dialogue}"
+                safe_full_name = html.escape(new_user.full_name or "User")
+                safe_dialogue = html.escape(dialogue)
+                text = f"👋 Welcome <a href='tg://user?id={new_user.id}'>{safe_full_name}</a>!\n\n{safe_dialogue}"
                 msg = await bot.send_message(chat.id, text)
                 stats.record_message()
                 
@@ -498,7 +523,10 @@ async def on_user_leave(event: types.ChatMemberUpdated):
     # === CHANNEL FAREWELL ===
     if chat.type == ChatType.CHANNEL:
         dialogue = random.choice(DIALOGUES["farewell_channel"])
-        text = f"Bye <a href='tg://user?id={user.id}'>{user.full_name}</a>! {dialogue}"
+        # 🛠️ BUG FIX: Escape HTML
+        safe_full_name = html.escape(user.full_name or "User")
+        safe_dialogue = html.escape(dialogue)
+        text = f"Bye <a href='tg://user?id={user.id}'>{safe_full_name}</a>! {safe_dialogue}"
         
         try:
             msg = await bot.send_message(chat.id, text)
@@ -568,9 +596,9 @@ async def main():
     logger.info(f"✅ Settings loaded: {len(SETTINGS.get_all())} items")
     
     # 🌟 Sabse pehle Web Server ko start karo (For Render Keep-Alive)
-    logger.info("🌐 Starting Web Server for Keep-Alive in Background...")
-    # Fix applied here: Use create_task so it doesn't block the rest of the code!
-    asyncio.create_task(start_web_server())
+    if KEEP_ALIVE_AVAILABLE:
+        logger.info("🌐 Starting Web Server for Keep-Alive in Background...")
+        asyncio.create_task(start_web_server())
     
     # Delete webhook and clear pending updates
     try:
