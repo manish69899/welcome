@@ -1,0 +1,22 @@
+{
+    "group_auto_delete_sec": 900,
+    "channel_auto_delete_sec": 120,
+    "welcome_enabled": true,
+    "farewell_enabled": true,
+    "image_welcome_enabled": true,
+    "max_name_length": 14,
+    "rate_limit_seconds": 5,
+    "log_events": true,
+    "stats_enabled": true,
+    "image_settings": {
+        "bg_width": 800,
+        "bg_height": 400,
+        "pfp_size": 160,
+        "border_width": 6,
+        "font_size_name": 32,
+        "font_size_subtitle": 24,
+        "gold_color": "#FFD700",
+        "shadow_color": "#000000",
+        "text_color": "#FFFFFF"
+    }
+}
